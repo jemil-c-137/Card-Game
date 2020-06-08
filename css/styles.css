@@ -1,0 +1,206 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto";
+  height: 100vh;
+}
+
+button {
+  font-family: "Roboto";
+}
+
+h1, p, button {
+  color: #fff;
+}
+
+.intro {
+  position: relative;
+}
+
+.main {
+  background: url(../img/Background.png) no-repeat;
+  background-size: cover;
+  height: 100%;
+}
+
+/* title */ 
+
+.intro {
+  display: none;
+}
+
+.intro.visible {
+  display: block;
+}
+
+.title {
+  padding: 5% 0 0 10%;
+  margin-bottom: 60px;
+}
+
+.title__text {
+  margin-bottom: 8px;
+  font-size: 57px;
+  font-weight: bold;
+  line-height: 67px;
+}
+
+.subtitle {
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 22px;
+}
+
+
+/* options */
+.options {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
+  align-items: flex-start;
+  margin-bottom: 110px;
+}
+
+.btn-difficulty {
+  position: relative;
+  font-size: 50px;
+  line-height: 59px;
+  background: none;
+  border: none;
+  margin-bottom: 24px;
+  margin-left: 40px;
+}
+
+.btn-difficulty:hover.btn-difficulty::before {
+  position: absolute;
+  top: 50%;
+  left: -30px;
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-color:  #D62B2E;
+  transform: rotate(45deg);
+  justify-self: center;
+}
+
+/* start */ 
+.btn-start {
+  width: 352px;
+  height: 95px;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 37px;
+  margin-left: 10%;
+  background: #D62B2E;
+  border: none;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* cards */
+.intro-cards {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+}
+
+.card-one, .card-two {
+  position: absolute;
+  width: 218px;
+  height: 341px;
+  background: url("../img/Карта 3.1.png");
+  background-size: cover;
+}
+
+.card-one {
+  transform: rotate(11.9deg);
+}
+
+.card-two {
+  left: 195px;
+  transform: rotate(39.26deg);
+}
+
+/* game table */
+
+.game-table-wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: url("../img/Background.png");
+  background-size: cover;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-table-wrapper.visible {
+  display: flex;
+}
+
+
+/* game table 3-6 cards */
+
+.game-table {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* game table 10 cards */
+
+.game-table.big {
+  width: 80%;
+}
+
+/* cards */ 
+.card {
+  position: relative;
+  width: 218px;
+  height: 241px;
+  margin: 64px 24px;
+  transition: transform .1s linear;
+  backface-visibility: hidden;
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform .5s ease;
+}
+
+.card:hover {
+  transform: rotate(-3deg) translateY(-20px) rotate(3deg);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+
+.card.clicked .card-back {
+  transform: rotateY(0);
+}
+
+.card.clicked .card-front {
+  transform: rotateY(-180deg);
+}
+
+.card.clicked {
+  transform: rotate(0)
+}
+
+.card.clicked:hover {
+  box-shadow: none;
+}
