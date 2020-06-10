@@ -2,43 +2,61 @@ const startButton = document.querySelector('.btn-start');
 const difficultyButton = document.querySelectorAll('.btn-difficulty');
 const gameOverCard = document.querySelector('.game-over');
 const gameField = document.querySelector('.game-table');
+// Перменная для хранения количества карт
+let difficultyLevel;
 
-let num;
-
-
+// Кнопки уровней сложности
 difficultyButton.forEach(button  => {
-  let btnData = button.dataset.numberOfCards;
+  let btnValue = button.dataset.numberOfCards;
   button.addEventListener('click', () => {
-    num = btnData
+    difficultyLevel = btnValue;
+    getActive(difficultyButton)
   })
 })
 
+function getActive(btns) {
+  btns.forEach(btn => {
+    btn.classList.remove('active');
+  })
+  event.target.classList.add('active');
+}
+
+// Кнопка начала игры
 startButton.addEventListener('click', () => {
+  if(difficultyLevel) {
+    newGame();
+  }
+})
+
+// Начало новой игры
+function newGame() {
   const intro = document.querySelector('.intro');
   const gameTable = document.querySelector('.game-table-wrapper');
   
-  function addCards(grid) {
-    for (i = 2; i < num; i++) {
+  // Добавление необходимого кол-ва карт
+  function addCards(cardsArea) {
+    for (i = 2; i < difficultyLevel; i++) {
       let cardHTML = gameOverCard.innerHTML;
       let newCard = document.createElement('div');
       newCard.classList.add('card');
       newCard.classList.add('created');
       newCard.innerHTML = cardHTML;
-      grid.appendChild(newCard);
+      cardsArea.appendChild(newCard);
     }
   }
   addCards(gameField);  
 
-  let cardsColoda = document.querySelectorAll('.card');
-  const cardBack = document.querySelectorAll('.card-back');
+  let cards = document.querySelectorAll('.card');
+  const cardBack = document.querySelectorAll('.card-front');
   
   function startGame() {
     intro.classList.remove('visible');
     gameTable.classList.add('visible');
-    shuffleCards(cardsColoda);
+    shuffleCards(cards);
   }
   startGame();
-  
+
+  //Тасование карт
   function shuffleCards(cardsArray) {
     for (let i = cardsArray.length - 1; i > 0; i--) {
       let randIndex = Math.floor(Math.random() * (i + 1));
@@ -58,22 +76,23 @@ startButton.addEventListener('click', () => {
       })
     })
   }
-  flipCard(cardsColoda);
+  flipCard(cards);
 
-
-  function restartGame(array) {
+  // Конец игры, удаление карт, переход на начальный экран
+  function restartGame(oldCards) {
     let createdCards = document.querySelectorAll('.created');
     let clicked = document.querySelector('.clicked');
-    array.forEach(arr => {
-      arr.addEventListener('click', () => {
+    oldCards.forEach(oldCard => {
+      oldCard.addEventListener('click', () => {
         intro.classList.add('visible');
         gameTable.classList.remove('visible');
         for (i = 0; i < createdCards.length; i++) {
           createdCards[i].remove();
         }
         clicked.classList.remove('clicked');
+        difficultyLevel = undefined;
+        getActive(difficultyButton)
       })
     })
   }
-})
-
+}

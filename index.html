@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
   <title>Найди Баг</title>
-</head>
+</head>   
 
 <body>
   <main class="main">
@@ -25,38 +25,38 @@
           <button class="btn-difficulty" data-number-of-cards="6">Средний</button>
           <button class="btn-difficulty" data-number-of-cards="10">Сложный</button>
         </div>
-        <div class="start">
-          <button class="btn-start">Начать игру</button>
-        </div>
+      </div>
+      <div class="start">
+        <button class="btn-start">Начать игру</button>
       </div>
       <div class="intro-cards">
-        <div class="card-one"></div>
-        <div class="card-two"></div>
+          <div class="card-one"></div>
+          <div class="card-two"></div>
       </div>
     </div>
-    
+
     <div class="game-table-wrapper">
       <div class="game-table big">
         <div class="card visible">
-          <div class="card-back card-face">
-            <img class="card-value" src="img/Карта с багом 2.png" alt="">
-          </div>
           <div class="card-front card-face">
-            <img class=""src="img/Карта 3.1.png" alt="">
+            <img src="img/bug-cart.png" alt="">
           </div>
-            
+          <div class="card-back card-face">
+            <img src="img/card-back.png" alt="">
+          </div>
+
         </div>
         <div class="card visible game-over">
-          <div class="card-back card-face">
-            <img class="card-value" src="img/Конец игры.png" alt="">
-          </div>
           <div class="card-front card-face">
-            <img src="img/Карта 3.1.png" alt="">
+            <img src="img/gameOver-cart.png" alt="">
+          </div>
+          <div class="card-back card-face">
+            <img src="img/card-back.png" alt="">
           </div>
         </div>
       </div>
     </div>
-    
+
   </main>
   <script src="js/script.js"></script>
 </body>

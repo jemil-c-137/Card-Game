@@ -1,0 +1,29 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  max-height: 100vh;
+  background: url("/img/Background.png");
+  background-size: cover;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #fff;
+}
+
+
+/*
+.main {
+  height: 100%;
+  
+}
+
+/* title */ 
+
