@@ -1,3 +1,5 @@
+'use strict'
+
 const startButton = document.querySelector('.btn-start');
 const difficultyButton = document.querySelectorAll('.btn-difficulty');
 const gameOverCard = document.querySelector('.game-over');
@@ -7,18 +9,18 @@ let difficultyLevel;
 
 // Кнопки уровней сложности
 difficultyButton.forEach(button  => {
-  let btnValue = button.dataset.numberOfCards;
+  const btnValue = button.dataset.numberOfCards;
   button.addEventListener('click', () => {
     difficultyLevel = btnValue;
-    getActive(difficultyButton)
+    removeActive(difficultyButton)
+    button.classList.add('active');
   })
 })
 
-function getActive(btns) {
+function removeActive(btns) {
   btns.forEach(btn => {
     btn.classList.remove('active');
   })
-  event.target.classList.add('active');
 }
 
 // Кнопка начала игры
@@ -34,10 +36,11 @@ function newGame() {
   const gameTable = document.querySelector('.game-table-wrapper');
   
   // Добавление необходимого кол-ва карт
-  function addCards(cardsArea) {
-    for (i = 2; i < difficultyLevel; i++) {
-      let cardHTML = gameOverCard.innerHTML;
-      let newCard = document.createElement('div');
+  let addCards = cardsArea => {
+
+    for (let i = 2; i < difficultyLevel; i++) {
+      const cardHTML = gameOverCard.innerHTML;
+      const newCard = document.createElement('div');
       newCard.classList.add('card');
       newCard.classList.add('created');
       newCard.innerHTML = cardHTML;
@@ -49,7 +52,7 @@ function newGame() {
   let cards = document.querySelectorAll('.card');
   const cardBack = document.querySelectorAll('.card-front');
   
-  function startGame() {
+  let startGame = () => {
     intro.classList.remove('visible');
     gameTable.classList.add('visible');
     shuffleCards(cards);
@@ -64,7 +67,7 @@ function newGame() {
     }
   }
 
-  function flipCard(cardsArray) {
+  let flipCard = cardsArray => {
     let canFlipCard = true;
     cardsArray.forEach(card => {
       card.addEventListener('click', () => {
@@ -79,16 +82,16 @@ function newGame() {
   flipCard(cards);
 
   // Конец игры, удаление карт, переход на начальный экран
-  function restartGame(oldCards) {
+  let restartGame = oldCards => {
     let createdCards = document.querySelectorAll('.created');
     let clicked = document.querySelector('.clicked');
     oldCards.forEach(oldCard => {
       oldCard.addEventListener('click', () => {
         intro.classList.add('visible');
         gameTable.classList.remove('visible');
-        for (i = 0; i < createdCards.length; i++) {
-          createdCards[i].remove();
-        }
+        createdCards.forEach(createdCard => {
+          createdCard.remove();
+        }) 
         clicked.classList.remove('clicked');
         difficultyLevel = undefined;
         getActive(difficultyButton)
