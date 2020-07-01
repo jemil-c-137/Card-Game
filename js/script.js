@@ -1,10 +1,5 @@
-"use strict"; // добавил
-/* 
+"use strict";
 
-
-const gameOverCard = document.querySelector('.game-over');
-const gameField = document.querySelector('.game-table');
-*/
 // Перменная для хранения количества карт
 class CardGame {
   constructor(level) {
@@ -40,7 +35,37 @@ class CardGame {
       cards[j] = cards[k];
       cards[k] = temp;
     }
-    this.checkToFlip(this.cards);
+    this.addCards(this.cards);
+  }
+
+  addCards(cards) {
+    cards.forEach((card) => {
+      console.log(cards);
+      const newCard = document.createElement("div");
+      newCard.classList.add("card");
+
+      const cardFront = document.createElement("div");
+      cardFront.classList.add("card-front", "card-face");
+
+      const cardBack = document.createElement("div");
+      cardBack.classList.add("card-back", "card-face");
+
+      const cardFrontImg = document.createElement("img");
+      cardFrontImg.src = `img/${card.type}-cart.png`;
+
+      const cardBackImg = document.createElement("img");
+      cardBackImg.src = "img/card-back.png";
+
+      // create Card
+      console.log(this.gameArea);
+      const game = this.gameArea.appendChild(newCard);
+
+      game.appendChild(cardFront);
+      game.appendChild(cardBack);
+      cardFront.appendChild(cardFrontImg);
+      cardBack.appendChild(cardBackImg);
+    });
+    this.checkToFlip(cards);
   }
 
   checkToFlip(cards) {
@@ -92,6 +117,9 @@ startButton.addEventListener("click", () => {
     game.startGame();
   }
 });
+
+// НЕ ОБРАЩАЕМ ВНИМАНИЕ :) СТАРЫЙ КОД
+
 /* 
 // Начало новой игры
 function newGame() {
@@ -199,35 +227,7 @@ function flipCard() {
     });
   }
 }
-
-const addCards = (array) => {
-  array.forEach((element) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.addEventListener("click", flipCard);
-
-    const cardFront = document.createElement("div");
-    cardFront.classList.add("card-front", "card-face");
-
-    const cardBack = document.createElement("div");
-    cardBack.classList.add("card-back", "card-face");
-
-    const cardFrontImg = document.createElement("img");
-    cardFrontImg.src = `img/${element.type}-cart.png`;
-
-    const cardBackImg = document.createElement("img");
-    cardBackImg.src = "img/card-back.png";
-
-    // create Card
-    const game = gameField.appendChild(card);
-    game.appendChild(cardFront);
-    game.appendChild(cardBack);
-    cardFront.appendChild(cardFrontImg);
-    cardBack.appendChild(cardBackImg);
-  });
-};
-
-addCards(cards);
+*/
 
 /*if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', flipCard(cards));
@@ -242,5 +242,3 @@ if (document.readyState === 'loading') {
   flipCard(cards);
 }
 */
-
-/* new game */
