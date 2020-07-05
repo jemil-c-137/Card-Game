@@ -1,4 +1,6 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -9,28 +11,28 @@ html {
 }
 
 body {
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
   background: url("../img/Background.png") no-repeat;
   background-size: cover;
   width: 100%;
   height: 100%;
   max-width: 1440px;
   color: #fff;
-  
 }
 
 button {
-  font-family: "Roboto";
+  font-family: "Roboto", sans-serif;
+  outline: none;
   border: none;
   background: transparent;
   cursor: pointer;
   color: #fff;
 }
 
-h1, p {
+h1,
+p {
   color: #fff;
 }
-
 
 .main {
   width: 100%;
@@ -44,7 +46,6 @@ h1, p {
   flex-direction: column;
   margin-left: 5%;
 }
-
 
 .intro.visible {
   display: block;
@@ -68,7 +69,6 @@ h1, p {
   font-size: 19px;
   line-height: 22px;
 }
-
 
 /* options */
 .options {
@@ -98,12 +98,12 @@ h1, p {
   display: inline-block;
   width: 18px;
   height: 18px;
-  background-color:  #D62B2E;
+  background-color: #d62b2e;
   transform: rotate(45deg) translateY(-50%);
   justify-self: center;
 }
 
-/* start */ 
+/* start */
 .start {
   margin-bottom: 5%;
 }
@@ -115,14 +115,14 @@ h1, p {
   font-weight: bold;
   line-height: 37px;
   margin-left: 10%;
-  background: #D62B2E;
+  background: #d62b2e;
   border: none;
   border-radius: 7px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .btn-start:hover {
@@ -130,21 +130,20 @@ h1, p {
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
 }
 
-
 /* cards */
 .intro-cards {
   position: absolute;
   top: 50%;
   left: 0;
   width: 100%;
-  
 }
 
 .intro-cards-wrapper {
   position: relative;
 }
 
-.card-one, .card-two {
+.card-one,
+.card-two {
   position: absolute;
   left: 60%;
   width: 218px;
@@ -152,8 +151,6 @@ h1, p {
   background: url("../img/card-back.png");
   background-size: cover;
 }
-
-
 
 .card-one {
   transform: rotate(11.9deg);
@@ -180,7 +177,6 @@ h1, p {
   display: block;
 }
 
-
 /* game table 3-6 cards */
 
 .game-table {
@@ -193,17 +189,17 @@ h1, p {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 }
 
-/* cards */ 
+/* cards */
 .card {
   position: relative;
-  width: 218px ;
+  width: 218px;
   height: 341px;
   margin-right: 5px;
   margin-bottom: 5px;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
   backface-visibility: hidden;
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -214,8 +210,7 @@ h1, p {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transition: transform .5s ease; 
-  
+  transition: transform 0.5s ease;
 }
 
 .card:hover {
@@ -236,17 +231,14 @@ h1, p {
 }
 
 .card.clicked .card-front {
-  transform: rotateY(0)
+  transform: rotateY(0);
 }
 
 .card.clicked .card-back {
-  transform: rotateY(-180deg)
+  transform: rotateY(-180deg);
 }
 
-
-
-
-/* Mediaqueries */ 
+/* Mediaqueries */
 @media only screen and (max-width: 1200px) {
   .card,
   img {
@@ -254,7 +246,6 @@ h1, p {
     height: 235px;
   }
 }
-
 
 @media only screen and (max-width: 1024px) {
   .intro-cards {
@@ -283,10 +274,10 @@ h1, p {
   .options {
     margin: 0;
   }
-  .start{
+  .start {
     margin: 0;
   }
-  
+
   .options {
     margin-left: 0;
     margin-bottom: 0;
@@ -360,6 +351,3 @@ h1, p {
     height: 150px;
   }
 }
-
-
-

@@ -6,85 +6,62 @@ class CardGame {
     this.intro = document.getElementById("intro");
     this.gameTable = document.getElementById("game-table");
     this.gameArea = document.getElementById("game-area");
+    this.cards = [];
   }
 
   startGame() {
     this.intro.classList.remove("visible");
     this.gameTable.classList.add("visible");
-    this.cards = [];
-    this.generateCards(this.cards);
+
+    this.generateCards();
   }
   // создание массива объектов
-  generateCards(cards) {
+  generateCards() {
     for (let i = 0; i < this.level; i++) {
-      cards.push({
-        isBug: i === 0,
+      this.cards.push({
         type: i === 0 ? "bug" : "gameOver",
       });
     }
-    this.shuffleCards(this.cards);
+    this.shuffleCards();
   }
   // алгоритм фишера йетса
-  shuffleCards(cards) {
-    for (let k = cards.length - 1; k > 0; k--) {
-      let j = Math.floor(Math.random() * (k + 1));
-      let temp = cards[j];
-      cards[j] = cards[k];
-      cards[k] = temp;
+  shuffleCards() {
+    for (let k = this.cards.length - 1; k > 0; k--) {
+      const j = Math.floor(Math.random() * (k + 1));
+      [this.cards[k], this.cards[j]] = [this.cards[j], this.cards[k]];
     }
-    this.addCards(this.cards);
+    this.addCards();
   }
   // Добавление карт в разметку
-  addCards(cards) {
-    cards.forEach((card) => {
-      this.newCard = document.createElement("div");
-      this.newCard.classList.add("card");
-      // this.newCard.addEventListener("click", this.flipCard);
-
-      const cardFront = document.createElement("div");
-      cardFront.classList.add("card-front", "card-face");
-
-      const cardBack = document.createElement("div");
-      cardBack.classList.add("card-back", "card-face");
-
-      const cardFrontImg = document.createElement("img");
-      cardFrontImg.src = `img/${card.type}-cart.png`;
-
-      const cardBackImg = document.createElement("img");
-      cardBackImg.src = "img/card-back.png";
-
-      // create Card
-      const game = this.gameArea.appendChild(this.newCard);
-
-      game.appendChild(cardFront);
-      game.appendChild(cardBack);
-      cardFront.appendChild(cardFrontImg);
-      cardBack.appendChild(cardBackImg);
+  addCards() {
+    this.cards.forEach((card) => {
+      this.gameArea.insertAdjacentHTML(
+        "afterbegin",
+        `<div class="card">
+          <div class="card-front card-face"><img alt="card-front" src="img/${card.type}-cart.png"></div>
+          <div class="card-back card-face"><img alt="card-back" src="img/card-back.png"></div>
+        </div>`
+      );
     });
     this.readyToFlip();
   }
   // Переворот карты
   readyToFlip() {
-    this.canFlip = true;
-    this.newCards = document.querySelectorAll(".card");
-    this.newCards.forEach((card) => {
+    let canFlip = true;
+    const newCards = document.querySelectorAll(".card");
+    newCards.forEach((card) => {
       card.addEventListener("click", () => {
-        if (this.canFlip) {
+        if (canFlip) {
           card.classList.add("clicked");
-          this.canFlip = false;
-          this.clickedCard = document.querySelector(".clicked");
-          this.restartGame(this.clickedCard);
+          canFlip = false;
+          const clickedCard = document.querySelector(".clicked");
+          this.restartGame(clickedCard);
         }
       });
     });
   }
-  /*
-  flipCard() {
-    this.classList.add("clicked");
-  }
-*/
-  restartGame() {
-    this.clickedCard.addEventListener("click", () => {
+  restartGame(clickedCard) {
+    clickedCard.addEventListener("click", () => {
       this.intro.classList.add("visible");
       this.gameTable.classList.remove("visible");
       this.gameArea.innerHTML = null;
@@ -96,12 +73,12 @@ class StartMenu {
   constructor() {
     this.startButton = document.querySelector(".btn-start");
     this.levelButton = document.querySelectorAll(".btn-difficulty");
-    this.level;
+    this.level = null;
   }
 
-  setLevel(level) {
+  setLevel() {
     this.levelButton.forEach((button) => {
-      let buttonValue = button.dataset.numberOfCards;
+      const buttonValue = button.dataset.numberOfCards;
       button.addEventListener("click", () => {
         this.level = buttonValue;
         this.removeActive(this.levelButton);
@@ -120,7 +97,7 @@ class StartMenu {
   prepareGame() {
     this.startButton.addEventListener("click", () => {
       if (this.level) {
-        let game = new CardGame(this.level);
+        const game = new CardGame(this.level);
         game.startGame();
         this.level = 0;
       }
@@ -128,50 +105,13 @@ class StartMenu {
   }
 }
 
-let runerGame = () => {
-  let goGame = new StartMenu();
+const runGame = () => {
+  const goGame = new StartMenu();
   goGame.setLevel();
 };
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", runerGame());
-} else {
-  runerGame();
-}
-/*
-const runGame = (start) => {
-  const startButton = document.querySelector(".btn-start");
-  const difficultyButton = document.querySelectorAll(".btn-difficulty");
-  let difficultyLevel;
-
-  console.log(difficultyLevel);
-  setTimeout(() => {
-    console.log(difficultyLevel);
-  }, 3000);
-
-  // Кнопки уровней сложности
-  difficultyButton.forEach((button) => {
-    const btnValue = button.dataset.numberOfCards;
-    button.addEventListener("click", () => {
-      difficultyLevel = btnValue;
-      removeActive(difficultyButton);
-      button.classList.add("active");
-    });
-  });
-
-  function removeActive(btns) {
-    btns.forEach((btn) => {
-      btn.classList.remove("active");
-    });
-  }
-
-  // Кнопка начала игры
-
-  startButton.addEventListener("click", () => {
-    if (difficultyLevel) {
-      let game = new CardGame(difficultyLevel);
-      game.startGame();
-    }
-  });
+const onDocumentLoad = () => {
+  runGame();
 };
-*/
+
+document.addEventListener("DOMContentLoaded", onDocumentLoad);
