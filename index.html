@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Найди Баг</title>
+  </head>
+
+  <body>
+    <main class="main">
+      <div class="intro visible" id="intro">
+        <div class="title">
+          <h1 class="title__text">
+            Выберите уровень сложности:
+          </h1>
+          <p class="subtitle">
+            Выберите сложность и игра начнется. Чем выше уровень - тем больше
+            будет выборка карт.
+          </p>
+        </div>
+        <div class="game-settings">
+          <div class="options">
+            <button class="btn-difficulty" data-number-of-cards="3">
+              Простой
+            </button>
+            <button class="btn-difficulty" data-number-of-cards="6">
+              Средний
+            </button>
+            <button class="btn-difficulty" data-number-of-cards="10">
+              Сложный
+            </button>
+          </div>
+        </div>
+        <div class="start">
+          <button class="btn-start">Начать игру</button>
+        </div>
+        <div class="intro-cards">
+          <div class="card-one"></div>
+          <div class="card-two"></div>
+        </div>
+      </div>
+
+      <div class="game-table-wrapper" id="game-table">
+        <div class="game-table big" id="game-area">
+          <!-- Cards generates here -->
+        </div>
+      </div>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
+</html>
